@@ -357,7 +357,7 @@ function body(bodytype) {
         <td>Step (cử)</td>
         <td>3.0±1.0 </td>
         <td>2.0~4.0</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="02StepLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="02StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         <tr>
@@ -713,14 +713,14 @@ function body(bodytype) {
         <td>Gap</td>
         <td>3.7±1.0</td>
         <td>2.7~4.7</td>
-        <td>LH: <input type="number" tabindex="2" maxlength="4" step="0.01" class="form-control nhap" id="01GapLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="01GapLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         <tr>
         <td>Step (cử)</td>
         <td>3.0±1.0 </td>
         <td>2.0~4.0</td>
-        <td>LH: <input type="number" tabindex="3" step="0.01" class="form-control" id="01StepLH nhap" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="01StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         <tr>
@@ -774,14 +774,14 @@ function body(bodytype) {
         <td>Gap</td>
         <td>3.7±1.0</td>
         <td>2.7~4.7</td>
-        <td>RH: <input type="number" tabindex="1" maxlength="4" step="0.01" class="form-control nhap" id="01GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number"step="0.01" class="form-control" id="01GapRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         <tr>
         <td>Step (cử)</td>
         <td>3.0±1.0 </td>
         <td>2.0~4.0</td>
-        <td>RH: <input type="number" tabindex="4" step="0.01" class="form-control" id="01StepRH nhap" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="01StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         <tr>
@@ -797,7 +797,7 @@ function body(bodytype) {
         <td>Step (cử)</td>
         <td>3.0±1.0 </td>
         <td>2.0~4.0</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="02StepLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="02StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         <tr>
