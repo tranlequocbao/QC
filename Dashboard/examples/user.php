@@ -1,5 +1,13 @@
 <?php
-
+session_start();
+$station='';
+if(isset($_SESSION['Station'])){
+  $station=$_SESSION['Station'];
+  $iduser =$_SESSION['IDuser'];
+  $dept =$_SESSION['Dept'];
+  //echo $station;echo $iduser; echo $dept; return;
+ 
+}else {echo "deo co session"; return;}
 $uri = explode('/', $_SERVER['REQUEST_URI']);
 $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $uri[1] . '/';
 
@@ -223,7 +231,7 @@ $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' 
               <i class="material-icons">bubble_chart</i>
               <p>Export</p>
             </a>
-          <!-- </li>
+            <!-- </li>
           <li class="nav-item ">
             <a class="nav-link" href="./map.html">
               <i class="material-icons">location_ons</i>
@@ -433,114 +441,121 @@ $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' 
                 </div>
               </div>
             </div>
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Danh sách Tài Khoản</h4>
-                  <p class="card-category">Xưởng Hàn</p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th>
-                          ID User
-                        </th>
-                        <th>
-                          Full Name
-                        </th>
-                        <th>
-                          Trạm
-                        </th>
-                        <th>
-                          Quyền truy cập
-                        </th>
-                        <th>
-                          Vị Trí
-                        </th>
-                        <th>
-                          Tạo lỗi
-                        </th>
+            <?php if(($_SESSION['Station'] == 'All'&&$_SESSION['Shop']=='All') || ($_SESSION['Station'] == 'All'&&$_SESSION['Shop']=='Body')):  ?>
+              
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">Danh sách Tài Khoản</h4>
+                    <p class="card-category">Xưởng Hàn</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th>
+                            ID User
+                          </th>
+                          <th>
+                            Full Name
+                          </th>
+                          <th>
+                            Trạm
+                          </th>
+                          <th>
+                            Quyền truy cập
+                          </th>
+                          <th>
+                            Vị Trí
+                          </th>
+                          <th>
+                            Tạo lỗi
+                          </th>
 
-                      </thead>
-                      <tbody id="table_han">
-                        
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody id="table_han">
+
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Danh sách Tài Khoản</h4>
-                  <p class="card-category">Xưởng Láp ráp</p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th>
-                          ID User
-                        </th>
-                        <th>
-                          Full Name
-                        </th>
-                        <th>
-                          Trạm
-                        </th>
-                        <th>
-                          Quyền truy cập
-                        </th>
-                        <th>
-                          Vị trí
-                        </th>
-                        <th>
-                          Tạo lỗi
-                        </th>
+              <?php endif; ?>
+              <?php if(($_SESSION['Station'] == 'All'&&$_SESSION['Shop']=='All') || ($_SESSION['Station'] == 'All'&&$_SESSION['Shop']=='TCF')):  ?>  
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">Danh sách Tài Khoản</h4>
+                    <p class="card-category">Xưởng Láp ráp</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th>
+                            ID User
+                          </th>
+                          <th>
+                            Full Name
+                          </th>
+                          <th>
+                            Trạm
+                          </th>
+                          <th>
+                            Quyền truy cập
+                          </th>
+                          <th>
+                            Vị trí
+                          </th>
+                          <th>
+                            Tạo lỗi
+                          </th>
 
-                      </thead>
-                      <tbody id="table_tcf">
-                        
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody id="table_tcf">
+
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Danh sách Tài Khoản</h4>
-                  <p class="card-category">Admin</p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th>
-                          ID User
-                        </th>
-                        <th>
-                          Full Name
-                        </th>
-                        <th>
-                          Trạm
-                        </th>
-                        <th>
-                          Quyền truy cập
-                        </th>
+            <?php endif; ?>
+            <?php if (trim($_SESSION['Dept']) == 'Admin'):  ?>
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">Danh sách Tài Khoản</h4>
+                    <p class="card-category">Admin</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th>
+                            ID User
+                          </th>
+                          <th>
+                            Full Name
+                          </th>
+                          <th>
+                            Trạm
+                          </th>
+                          <th>
+                            Quyền truy cập
+                          </th>
 
-                      </thead>
-                      <tbody id="table_admin">
-                        
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody id="table_admin">
+
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            <?php endif; ?>
           </div>
         </div>
 
@@ -809,7 +824,7 @@ $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' 
           },
 
         });
-    
+
         $('#IDdept a').on('click', function() {
           // $('#btn_dept').text($(this).text());
           //alert($(this).text());
@@ -840,13 +855,13 @@ $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' 
           var Shop = $('#btn_shop').text();
           var Position = $('#btn_position').text();
           var Station = $('#btn_station').text();
-          
+
 
           if (IDuser != "" && Fullname != "" && Dept != "" && Type != "") {
             $.ajax({
               url: "./connectdatabase/savedata.php",
               type: "POST",
-            
+
               data: {
                 IDuser: IDuser,
                 Fullname: Fullname,
@@ -856,13 +871,13 @@ $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' 
                 Position: Position,
                 Station: Station,
               },
-              dataType:'json',
+              dataType: 'json',
               success: function(dataResult) {
                 // alert(IDuser + Fullname + Dept + Type + Shop);
                 console.log(dataResult);
                 alert("Da insert data thanh cong");
-                
-            
+
+
                 reloadPage();
 
               },
@@ -995,9 +1010,9 @@ $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' 
           })
         })
       });
-      $('#export').on('click',function(){
-       
-        window.open("<?=$home_folder.'export'?>", '_blank');
+      $('#export').on('click', function() {
+
+        window.open("<?= $home_folder . 'export' ?>", '_blank');
       })
     </script>
     <script>

@@ -5,13 +5,19 @@
     ini_set('display_startup_errors', TRUE);
 
     if(!isset($_SESSION)) session_start();
-    $station=$_SESSION['Station'];
-	if(!isset($_SESSION['IDuser'])&& $station!="All"){
+    $station=$_SESSION['Station']; 
+	// if(!isset($_SESSION['IDuser'])&& $station!="All"){
+    //     $_SESSION['error'] = 'Chưa đăng nhập hoặc tài khoản không được quyền truy cập!';
+	// 	header("Location: ../login/logout.php");
+	// 	return;
+    // }
+    if($station!="All"){
+        echo $station; return;
+
         $_SESSION['error'] = 'Chưa đăng nhập hoặc tài khoản không được quyền truy cập!';
 		header("Location: ../login/logout.php");
 		return;
     }
-
     if(strpos($_SERVER['HTTP_HOST'], 'localhost') == 0){
         $uri = explode('/', $_SERVER['REQUEST_URI']);
         $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $uri[1] . '/';

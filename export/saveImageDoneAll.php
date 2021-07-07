@@ -73,17 +73,17 @@ function updateToTableCarExportByTool($db, $vincode, $begin = false){
 require_once "connectdata.php";
 require_once '../vendor/PHPExcel/Classes/PHPExcel.php';
 require_once 'configFile.php';
-require_once './log.php';
-$db = new pdoRequest();
-$log = new Logger();
+//require_once './log.php';
+//$db = new pdoRequest();
+//$log = new Logger();
 
-if(isset($_POST['tool']) && $_POST['tool'] == '1' && !updateToTableCarExportByTool($db, $_POST['vin_code'], true)){
-    echo json_encode([
-        'code' => 201,
-        'message' => 'Warning: updateToTableCarExportByTool error begin'
-    ]);
-    return true;
-}
+// if(isset($_POST['tool']) && $_POST['tool'] == '1' && !updateToTableCarExportByTool($db, $_POST['vin_code'], true)){
+//     echo json_encode([
+//         'code' => 201,
+//         'message' => 'Warning: updateToTableCarExportByTool error begin'
+//     ]);
+//     return true;
+// }
 
 $images = $_POST['images'];
 $vin_code = $_POST['vin_code'];
@@ -93,10 +93,15 @@ $username = $_SESSION['logined']['username'] ?? 'admin';
 
 $path = [];
 
-$db->setTable('car_code');
 
-$folder = $db->one(['car_code',$vin_code_mini])['car_folder'];
 
+$folder = "";
+$query_folder = 'select car_folder from car_code where carcode="'.$vin_code_mini.'"';
+$result=$conn->query($query_folder);
+if($result->num_rows>0){
+    $row=$result0->fetch_assoc();
+    $folder=$row['car_folder'];
+}
 //default url signature
 $signaturePath = realpath('../assets/images/Stamp');
 $heightSignature = 68;
@@ -109,8 +114,15 @@ $endSheet = 1;
 $config          = [$configExcelSheet1, $configExcelSheet2];
  date_default_timezone_set("Asia/Ho_Chi_Minh");
         $dayCreate = date('dmY');
- $db->setTable('checking');
-        $dayCreate = $db->one(['error_code', $vin_code])['updated_at'] ??'';
+//  $db->setTable('checking');
+//         $dayCreate = $db->one(['error_code', $vin_code])['updated_at'] ??'';
+
+        $query_daycreate = 'select updated_at from checking_02_han where error_code="'.$vin_code.'"';
+        $result=$conn->query($query_daycreate);
+        if($result->num_rows>0){
+            $row=$result->fetch_assoc();
+            $dayCreate=$row['updated_at'];
+        }
         $dayCreate = substr($dayCreate,0,10);
 $ds = DIRECTORY_SEPARATOR;
 $path_export_temp = __DIR__ . $ds . '..' . $ds . 'files' . $ds . 'export_temp' . $ds . $vin_code;
@@ -118,9 +130,9 @@ $name_file_excel = $vin_code.'_'.$dayCreate;
 $path_file_excel = $path_export_temp . $ds . 'excel' . $ds . $name_file_excel. '.xlsx';
 
 //make folder if not exists
-if (!file_exists($path_export_temp. $ds . 'images' . $ds . 'SEALER')) {
-    mkdir($path_export_temp. $ds . 'images' . $ds . 'SEALER', 0777, true);
-}
+// if (!file_exists($path_export_temp. $ds . 'images' . $ds . 'SEALER')) {
+//     mkdir($path_export_temp. $ds . 'images' . $ds . 'SEALER', 0777, true);
+// }
 if (!file_exists($path_export_temp. $ds . 'images' . $ds . 'QC1K')) {
     mkdir($path_export_temp. $ds . 'images' . $ds . 'QC1K', 0777, true);
 }
@@ -186,230 +198,230 @@ foreach ($images as $is => $image){
 }
 
 //get info car
-$db->setTable('car_code');
-$infoCar = $db->one(['car_code', $vin_code_mini]);
+// $db->setTable('car_code');
+// $infoCar = $db->one(['car_code', $vin_code_mini]);
 
-$aryCarGAY = ['J72A', 'J72K'];
+// $aryCarGAY = ['J72A', 'J72K'];
 
-$nameFileExcelUse = 'temp_demo.xls';
-$configFile = !in_array($infoCar['car_folder'], $aryCarGAY) ? $configFileCarOld : $configFileCarGAY;
-if(isset($infoCar)&&$infoCar['type_export'] == 'new'){
+// $nameFileExcelUse = 'temp_demo.xls';
+// $configFile = !in_array($infoCar['car_folder'], $aryCarGAY) ? $configFileCarOld : $configFileCarGAY;
+// if(isset($infoCar)&&$infoCar['type_export'] == 'new'){
     
-    $nameFileExcelUse = 'temp_pg.xls';
-    $configFile = $configFileCarNew;
-}
+//     $nameFileExcelUse = 'temp_pg.xls';
+//     $configFile = $configFileCarNew;
+// }
 
-$data_res = [];
+// $data_res = [];
 
-$excel  = PHPExcel_IOFactory::load('../files/excel/' . $nameFileExcelUse);
-$excel  ->getProperties()
-        ->setCreator('CDD')
-        ->setTitle('Export Thông tin xe: ' . $vin_code)
-        ->setLastModifiedBy(date('d/m/Y'))
-        ->setSubject('Export')
-        ->setDescription('Export Thông tin xe: ' . $vin_code)
-        ->setKeywords($vin_code)
-        ->setCategory('QC1K');
+// $excel  = PHPExcel_IOFactory::load('../files/excel/' . $nameFileExcelUse);
+// $excel  ->getProperties()
+//         ->setCreator('CDD')
+//         ->setTitle('Export Thông tin xe: ' . $vin_code)
+//         ->setLastModifiedBy(date('d/m/Y'))
+//         ->setSubject('Export')
+//         ->setDescription('Export Thông tin xe: ' . $vin_code)
+//         ->setKeywords($vin_code)
+//         ->setCategory('QC1K');
 
-for ($subSheet = 0; $subSheet <= 1; $subSheet++) {
+// for ($subSheet = 0; $subSheet <= 1; $subSheet++) {
 
-    $excel->setActiveSheetIndex($subSheet);
-    $activeSheet = $excel->getActiveSheet();
+//     $excel->setActiveSheetIndex($subSheet);
+//     $activeSheet = $excel->getActiveSheet();
 
-    //allow config
-    $cf = $config[$subSheet];
-    extract($cf);
-    //ghi thong tin ns submit len excel
-    if($subSheet == 0){
+//     //allow config
+//     $cf = $config[$subSheet];
+//     extract($cf);
+//     //ghi thong tin ns submit len excel
+//     if($subSheet == 0){
 
-        $db->setTable('history_err_sealer');
-        $user_check = $db->one([['err_code', $vin_code], ['err_level', '2']])['err_user_fullname'] ?? '';
-        $hasError = $db->one([['err_code', $vin_code], ['err_level', 'IN', ['1','2','3']]]) ?? false;
-        $db->setTable('car_sealered');
-        $user_create = $db->one(['vin_code', $vin_code])['user_submit'] ?? '';
+//         $db->setTable('history_err_sealer');
+//         $user_check = $db->one([['err_code', $vin_code], ['err_level', '2']])['err_user_fullname'] ?? '';
+//         $hasError = $db->one([['err_code', $vin_code], ['err_level', 'IN', ['1','2','3']]]) ?? false;
+//         $db->setTable('car_sealered');
+//         $user_create = $db->one(['vin_code', $vin_code])['user_submit'] ?? '';
 
-        date_default_timezone_set("Asia/Ho_Chi_Minh");
-        $dayCreate = date('d-m-Y');
+//         date_default_timezone_set("Asia/Ho_Chi_Minh");
+//         $dayCreate = date('d-m-Y');
 
-        $db->setTable('checking');
-        $dayCreate1 = $db->one(['error_code', $vin_code])['updated_at'] ??'';
-        $dayCreate1 = substr($dayCreate1,0,10);
-        $dayCreate2 = $db->get(['error_code', $vin_code], null, ['created_at' => "DESC"]);
-        // var_dump($dayCreate2);
-        // die;
+//         $db->setTable('checking');
+//         $dayCreate1 = $db->one(['error_code', $vin_code])['updated_at'] ??'';
+//         $dayCreate1 = substr($dayCreate1,0,10);
+//         $dayCreate2 = $db->get(['error_code', $vin_code], null, ['created_at' => "DESC"]);
+//         // var_dump($dayCreate2);
+//         // die;
         
-        $db->setTable('car_code');
-        $getInCarCode = $db->one(['car_code', $vin_code_mini]);
-        $car_type = $getInCarCode['car_type'] ?? '';
-        $car_folder = $getInCarCode['car_folder'] ?? '';
+//         $db->setTable('car_code');
+//         $getInCarCode = $db->one(['car_code', $vin_code_mini]);
+//         $car_type = $getInCarCode['car_type'] ?? '';
+//         $car_folder = $getInCarCode['car_folder'] ?? '';
 
-        $db->setTable('plan_vin');
-        $color = $db->one(['vin_code', $vin_code])['color'] ?? '';
+//         $db->setTable('plan_vin');
+//         $color = $db->one(['vin_code', $vin_code])['color'] ?? '';
 
-        $vinCode_v2     = $activeSheet->getCell($vincodeLocation)->getValue() . ' ' . $vin_code;
-        $dayCreate1      = $activeSheet->getCell($dayexportLocation)->getValue() . ' ' . $dayCreate1;
-        $car_type       = $activeSheet->getCell($cartypeLocation)->getValue() . ' ' . $car_type;
-        $car_folder     = $activeSheet->getCell($carfolerLocation)->getValue() . ' ' . $car_folder;
-        $color          = $activeSheet->getCell($colorLocation)->getValue() . ' ' . $color;
+//         $vinCode_v2     = $activeSheet->getCell($vincodeLocation)->getValue() . ' ' . $vin_code;
+//         $dayCreate1      = $activeSheet->getCell($dayexportLocation)->getValue() . ' ' . $dayCreate1;
+//         $car_type       = $activeSheet->getCell($cartypeLocation)->getValue() . ' ' . $car_type;
+//         $car_folder     = $activeSheet->getCell($carfolerLocation)->getValue() . ' ' . $car_folder;
+//         $color          = $activeSheet->getCell($colorLocation)->getValue() . ' ' . $color;
 
-        $activeSheet->setCellValue($userCheckLocation,$user_check);
-        $activeSheet->setCellValue($userCreateLocation,$user_create);
-        $activeSheet->setCellValue($vincodeLocation,$vinCode_v2);
-        $activeSheet->setCellValue($dayexportLocation,$dayCreate1);
-        $activeSheet->setCellValue($cartypeLocation,$car_type);
-        $activeSheet->setCellValue($carfolerLocation,$car_folder);
-        $activeSheet->setCellValue($colorLocation,$color);
+//         $activeSheet->setCellValue($userCheckLocation,$user_check);
+//         $activeSheet->setCellValue($userCreateLocation,$user_create);
+//         $activeSheet->setCellValue($vincodeLocation,$vinCode_v2);
+//         $activeSheet->setCellValue($dayexportLocation,$dayCreate1);
+//         $activeSheet->setCellValue($cartypeLocation,$car_type);
+//         $activeSheet->setCellValue($carfolerLocation,$car_folder);
+//         $activeSheet->setCellValue($colorLocation,$color);
 
-        $db->setTable('car_sealered');
-        $userSubmitSealer = $db->one(['vin_code',$vin_code]);
+//         $db->setTable('car_sealered');
+//         $userSubmitSealer = $db->one(['vin_code',$vin_code]);
 
-        //codition old: count($userSubmitSealer) > 0 && !!$hasError
-        if(count($userSubmitSealer) > 0){
-            //draw img sheet SEALER
-            draw($excel,$userSubmitSealer['usercode_submit'], $signatureSubmit1, $signaturePath, $path_file_excel,$heightSignature);
-            draw($excel,$userSubmitSealer['usercode_submit'], $signatureSubmit2, $signaturePath, $path_file_excel,$heightSignature);
-        }
+//         //codition old: count($userSubmitSealer) > 0 && !!$hasError
+//         if(count($userSubmitSealer) > 0){
+//             //draw img sheet SEALER
+//             draw($excel,$userSubmitSealer['usercode_submit'], $signatureSubmit1, $signaturePath, $path_file_excel,$heightSignature);
+//             draw($excel,$userSubmitSealer['usercode_submit'], $signatureSubmit2, $signaturePath, $path_file_excel,$heightSignature);
+//         }
 
-        //check error
-        $errorSealerConfig = $configFile['SEALER'];
-        $db->setTable('sealer_checking');
-        $checkingErrorSealer = $db->get(['error_code', $vin_code]) ?? [];
-        $checkingErrorSealer = getErrorPosition($checkingErrorSealer);
-        foreach ($errorSealerConfig as $item => $err){
-            if(in_array($item, $checkingErrorSealer)){
-                setValue($activeSheet,$err, 'X', 'c0392b');
-            }else{
-                setValue($activeSheet,$err, 'V', 'ffffff');
-            }
-        }
+//         //check error
+//         $errorSealerConfig = $configFile['SEALER'];
+//         $db->setTable('sealer_checking');
+//         $checkingErrorSealer = $db->get(['error_code', $vin_code]) ?? [];
+//         $checkingErrorSealer = getErrorPosition($checkingErrorSealer);
+//         foreach ($errorSealerConfig as $item => $err){
+//             if(in_array($item, $checkingErrorSealer)){
+//                 setValue($activeSheet,$err, 'X', 'c0392b');
+//             }else{
+//                 setValue($activeSheet,$err, 'V', 'ffffff');
+//             }
+//         }
 
-    }else if($subSheet == 1){
-        $db->setTable('checking');
-        $aryErrIdGetDb = $db->get([['error_code', $vin_code], ['err_level', 'IN', ['2','3']]]);
+//     }else if($subSheet == 1){
+//         $db->setTable('checking');
+//         $aryErrIdGetDb = $db->get([['error_code', $vin_code], ['err_level', 'IN', ['2','3']]]);
 
-        $aryErrId
-            = $aryErrIdRh
-            = $aryErrIdLh
-            = [];
-        foreach ($aryErrIdGetDb as $errId){
-            if($errId['error_user'] == 'RH'){
-                array_push($aryErrIdRh, $errId['err_id']);
-            }else if($errId['error_user'] == 'LH'){
-                array_push($aryErrIdLh, $errId['err_id']);
-            }
-            array_push($aryErrId, $errId['err_id']);
-        }
+//         $aryErrId
+//             = $aryErrIdRh
+//             = $aryErrIdLh
+//             = [];
+//         foreach ($aryErrIdGetDb as $errId){
+//             if($errId['error_user'] == 'RH'){
+//                 array_push($aryErrIdRh, $errId['err_id']);
+//             }else if($errId['error_user'] == 'LH'){
+//                 array_push($aryErrIdLh, $errId['err_id']);
+//             }
+//             array_push($aryErrId, $errId['err_id']);
+//         }
 
-        $db->setTable('history_err');
-        $userPolishRh = $db->one([['err_id', 'IN', $aryErrIdRh], ['err_user_change', 'POLISH']])['err_user_fullname'] ?? '';
-        $userPolishLh = $db->one([['err_id', 'IN', $aryErrIdLh], ['err_user_change', 'POLISH']])['err_user_fullname'] ?? '';
-        $userRepairLh = $db->one([['err_id', 'IN', $aryErrIdLh], ['err_user_change', 'REPAIR']])['err_user_fullname'] ?? '';
-        $userRepairRh = $db->one([['err_id', 'IN', $aryErrIdRh], ['err_user_change', 'REPAIR']])['err_user_fullname'] ?? '';
-        $userRepairV2 = $db->one([['err_id', 'IN', $aryErrId], ['err_user_change', 'REPAIR_V2']])['err_user_fullname'] ?? '';
+//         $db->setTable('history_err');
+//         $userPolishRh = $db->one([['err_id', 'IN', $aryErrIdRh], ['err_user_change', 'POLISH']])['err_user_fullname'] ?? '';
+//         $userPolishLh = $db->one([['err_id', 'IN', $aryErrIdLh], ['err_user_change', 'POLISH']])['err_user_fullname'] ?? '';
+//         $userRepairLh = $db->one([['err_id', 'IN', $aryErrIdLh], ['err_user_change', 'REPAIR']])['err_user_fullname'] ?? '';
+//         $userRepairRh = $db->one([['err_id', 'IN', $aryErrIdRh], ['err_user_change', 'REPAIR']])['err_user_fullname'] ?? '';
+//         $userRepairV2 = $db->one([['err_id', 'IN', $aryErrId], ['err_user_change', 'REPAIR_V2']])['err_user_fullname'] ?? '';
 
-        $userPolish = implode(' - ', [$userPolishLh, $userPolishRh]);
-        $userRepair = implode(' - ', [$userRepairLh, $userRepairRh]);
+//         $userPolish = implode(' - ', [$userPolishLh, $userPolishRh]);
+//         $userRepair = implode(' - ', [$userRepairLh, $userRepairRh]);
 
-        $activeSheet->setCellValue($userPolishLocation,$userPolish);
-        $activeSheet->setCellValue($userRepairLocation,$userRepair);
-        $activeSheet->setCellValue($userRepairV2Location,$userRepairV2);
+//         $activeSheet->setCellValue($userPolishLocation,$userPolish);
+//         $activeSheet->setCellValue($userRepairLocation,$userRepair);
+//         $activeSheet->setCellValue($userRepairV2Location,$userRepairV2);
 
-        $db->setTable('history_err');
-        $userSubmitLH = $db->one([['err_code', $vin_code],['err_user_change', 'LH'], ['err_level', '1']]);
-        $userSubmitRH = $db->one([['err_code', $vin_code],['err_user_change', 'RH'], ['err_level', '1']]);
+//         $db->setTable('history_err');
+//         $userSubmitLH = $db->one([['err_code', $vin_code],['err_user_change', 'LH'], ['err_level', '1']]);
+//         $userSubmitRH = $db->one([['err_code', $vin_code],['err_user_change', 'RH'], ['err_level', '1']]);
 
-        //check error
-        $errorLHConfig = $configFile['LH'];
-        $errorRHConfig = $configFile['RH'];
-        $localNow = '';
-        $write = true;
-        $db->setTable('checking');
-        $checkingErrorQC1K = $db->get([['error_code', $vin_code], ['recoat_flag','0']]) ?? [];
-        $checkingErrorQC1K = getErrorPosition($checkingErrorQC1K);
-        $arySaveBeforeData = [];
-        foreach (array_merge($errorLHConfig, $errorRHConfig) as $item => $err){
-            $val = 'V';
-            $color = 'ffffff';
+//         //check error
+//         $errorLHConfig = $configFile['LH'];
+//         $errorRHConfig = $configFile['RH'];
+//         $localNow = '';
+//         $write = true;
+//         $db->setTable('checking');
+//         $checkingErrorQC1K = $db->get([['error_code', $vin_code], ['recoat_flag','0']]) ?? [];
+//         $checkingErrorQC1K = getErrorPosition($checkingErrorQC1K);
+//         $arySaveBeforeData = [];
+//         foreach (array_merge($errorLHConfig, $errorRHConfig) as $item => $err){
+//             $val = 'V';
+//             $color = 'ffffff';
 
-            if(isset($arySaveBeforeData['location'])){
-                if($arySaveBeforeData['location'] != $err){
-                    $arySaveBeforeData = [];
-                }elseif(in_array($item, $checkingErrorQC1K)){
-                    $val = 'X';
-                    $color = 'c0392b';
-                    $arySaveBeforeData['flag'] = 0;
-                    setValue($activeSheet, $err, $val, $color);
-                    continue;
-                }else{
-                    continue;
-                }
-            }
-            if(empty($arySaveBeforeData)){
-                $arySaveBeforeData = [
-                    'item' => $item,
-                    'location' => $err,
-                    'flag' => 1
-                ];
-            }
+//             if(isset($arySaveBeforeData['location'])){
+//                 if($arySaveBeforeData['location'] != $err){
+//                     $arySaveBeforeData = [];
+//                 }elseif(in_array($item, $checkingErrorQC1K)){
+//                     $val = 'X';
+//                     $color = 'c0392b';
+//                     $arySaveBeforeData['flag'] = 0;
+//                     setValue($activeSheet, $err, $val, $color);
+//                     continue;
+//                 }else{
+//                     continue;
+//                 }
+//             }
+//             if(empty($arySaveBeforeData)){
+//                 $arySaveBeforeData = [
+//                     'item' => $item,
+//                     'location' => $err,
+//                     'flag' => 1
+//                 ];
+//             }
 
-            if(in_array($item, $checkingErrorQC1K)){
-                $val = 'X';
-                $color = 'c0392b';
-                $arySaveBeforeData['flag'] = 0;
-            }
+//             if(in_array($item, $checkingErrorQC1K)){
+//                 $val = 'X';
+//                 $color = 'c0392b';
+//                 $arySaveBeforeData['flag'] = 0;
+//             }
 
-            setValue($activeSheet, $err, $val, $color);
-        }
+//             setValue($activeSheet, $err, $val, $color);
+//         }
 
-        //draw img sheet QC1K
-        //LH
-        if(gettype($userSubmitLH) == 'array' && count($userSubmitLH) > 0){
-            draw($excel,$userSubmitLH['err_user_code'], $signatureLH1, $signaturePath, $path_file_excel,$heightSignature);
-            draw($excel,$userSubmitLH['err_user_code'], $signatureLH2, $signaturePath, $path_file_excel,$heightSignature);
-        }
-        //RH
-        if(gettype($userSubmitRH) == 'array' && count($userSubmitRH) > 0){
-            draw($excel,$userSubmitRH['err_user_code'], $signatureRH1, $signaturePath, $path_file_excel,$heightSignature);
-            draw($excel,$userSubmitRH['err_user_code'], $signatureRH2, $signaturePath, $path_file_excel,$heightSignature);
-        }
-    }
+//         //draw img sheet QC1K
+//         //LH
+//         if(gettype($userSubmitLH) == 'array' && count($userSubmitLH) > 0){
+//             draw($excel,$userSubmitLH['err_user_code'], $signatureLH1, $signaturePath, $path_file_excel,$heightSignature);
+//             draw($excel,$userSubmitLH['err_user_code'], $signatureLH2, $signaturePath, $path_file_excel,$heightSignature);
+//         }
+//         //RH
+//         if(gettype($userSubmitRH) == 'array' && count($userSubmitRH) > 0){
+//             draw($excel,$userSubmitRH['err_user_code'], $signatureRH1, $signaturePath, $path_file_excel,$heightSignature);
+//             draw($excel,$userSubmitRH['err_user_code'], $signatureRH2, $signaturePath, $path_file_excel,$heightSignature);
+//         }
+//     }
 
-    if($subSheet < $endSheet){
-        $excel->createSheet();
-    }
-}
+//     if($subSheet < $endSheet){
+//         $excel->createSheet();
+//     }
+// }
 
-while(1){
-    try{
-        $excel->setActiveSheetIndexByName('Worksheet');
-        $sheetIndex = $excel->getActiveSheetIndex();
-        $excel->removeSheetByIndex($sheetIndex);
-    }catch (Exception $exception){
-        break;
-    }
-}
+// while(1){
+//     try{
+//         $excel->setActiveSheetIndexByName('Worksheet');
+//         $sheetIndex = $excel->getActiveSheetIndex();
+//         $excel->removeSheetByIndex($sheetIndex);
+//     }catch (Exception $exception){
+//         break;
+//     }
+// }
 
-$db->setTable('car_submit_by_repair_v2');
-if(!$db->update(['exported' => 1], ['car_code', $vin_code])){
-    echo json_encode([
-        'code' => 201,
-        'message' => 'Warning: update v2 error'
-    ]);
-    return true;
-}
+// $db->setTable('car_submit_by_repair_v2');
+// if(!$db->update(['exported' => 1], ['car_code', $vin_code])){
+//     echo json_encode([
+//         'code' => 201,
+//         'message' => 'Warning: update v2 error'
+//     ]);
+//     return true;
+// }
 
-if(isset($_POST['tool']) && $_POST['tool'] == '1' && !updateToTableCarExportByTool($db, $vin_code)){
-    echo json_encode([
-        'code' => 201,
-        'message' => 'Warning: updateToTableCarExportByTool error'
-    ]);
-    return true;
-}
+// if(isset($_POST['tool']) && $_POST['tool'] == '1' && !updateToTableCarExportByTool($db, $vin_code)){
+//     echo json_encode([
+//         'code' => 201,
+//         'message' => 'Warning: updateToTableCarExportByTool error'
+//     ]);
+//     return true;
+// }
 
-echo json_encode([
-    'code' => 200,
-    'message' => 'Done',
-    'data' => $data_res
-]);
+// echo json_encode([
+//     'code' => 200,
+//     'message' => 'Done',
+//     'data' => $data_res
+// ]);
 
 return true;
