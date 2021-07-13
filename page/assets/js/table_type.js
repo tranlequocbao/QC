@@ -1193,7 +1193,107 @@ function body(bodytype) {
         <td>2.8 ~ 4.8</td>
         <td>LH: <input type="number" step="0.01" class="form-control" id="03StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
+
+        <tr>
+        <td rowspan="6">Capo và gò má</td>
+        <td rowspan="2">01</td>
+        <td>Gap</td>
+        <td>3.7+1.0</td>
+        <td>2.7 ~ 4.7</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="01GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+        <tr>
+        <td>Step (cử)</td>
+        <td>3.1+1.0</td>
+        <td>2.1 ~ 4.1</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="01StepRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+
+
+        <tr>
+        <td rowspan="2">02</td>
+        <td>Gap</td>
+        <td>3.5+1.0</td>
+        <td>2.5 ~ 4.5</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="02GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+        <tr>
+        <td>Step (cử)</td>
+        <td>3.5+1.0</td>
+        <td>2.5 ~ 4.5</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="02StepRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+
+        <tr>
+        <td rowspan="2">03</td>
+        <td>Gap</td>
+        <td>3.5+1.0</td>
+        <td>2.5 ~ 4.5</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="03GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+        <tr>
+        <td>Step (cử)</td>
+        <td>3.8+1.0</td>
+        <td>2.8 ~ 4.8</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="03StepRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+
+        <tr>
+        <td rowspan="4">Gò má và trụ kính</td>
+        <td rowspan="4">06</td>
+        <td>Gap</td>
+        <td>2.3+1.2</td>
+        <td>1.1 ~ 3.5</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="06GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+        <tr>
+        <td>Step</td>
+        <td>0.0+1.5</td>
+        <td>-1.5 ~ 1.5</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="06StepRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+        <tr>
+        <td>Up BL diff.</td>
+        <td>0.0+1.5</td>
+        <td>-1.5 ~ 1.5</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="06UpRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+        <tr>
+        <td>Low BL diff.</td>
+        <td>0.0+1.0</td>
+        <td>-1.0 ~ 1.0</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="06SLowRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
         
+
+        <tr>
+        <td rowspan="4">Gò má và cửa trước</td>
+        <td rowspan="2">04</td>
+        <td>Gap</td>
+        <td>3.7+1.0</td>
+        <td>2.7 ~ 4.7</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="04GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+        <tr>
+        <td>Step</td>
+        <td>0.0+1.0</td>
+        <td>-1.0 ~ 1.0</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="04StepRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+
+        <tr>
+        <td rowspan="2">05</td>
+        <td>Gap</td>
+        <td>4.1+1.0</td>
+        <td>3.1 ~ 5.1</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="05GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
+        <tr>
+        <td>Step</td>
+        <td>0.0+1.0</td>
+        <td>-1.0 ~ 1.0</td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="05StepRH" style="width: 80px;" placeholder="Sai số"/></td>
+        </tr>
               `;
     }
     else if (bodytype == 'J59C_SD') {
@@ -1262,14 +1362,14 @@ function body(bodytype) {
         <tr>  
         <td rowspan="2">13 <br> (6.2WL)</td>
         <td>Gap</td>
-        <td>3.3+1.0</td>
+        <td>3.3±1.0</td>
         <td>2.3~4.3</td>
         <td>RH: <input type="number" step="0.01" class="form-control" id="13GapRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step</td>
         <td>0.4±1.0</td>
-        <td>0.6~1.4</td>
+        <td>-0.6~1.4</td>
         <td>RH: <input type="number" step="0.01" class="form-control" id="13StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
@@ -1454,8 +1554,8 @@ function body(bodytype) {
         </tr>
         <tr>
         <td>Step</td>
-        <td>-0.4±1.0 </td>
-        <td>-1.4~+0.6</td>
+        <td>-0.1 +1.0/-0.7</td>
+        <td>-0.8~+0.9</td>
         <td>LH: <input type="number" step="0.01" class="form-control" id="07StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
@@ -1470,8 +1570,8 @@ function body(bodytype) {
         </tr>
         <tr>
         <td>Step</td>
-        <td>0.2±1.0</td>
-        <td>-0.8~+1.2</td>  
+        <td>-1.6 +0.7/-1.0</td>
+        <td>-2.6~-0.9</td>  
         <td>LH: <input type="number" step="0.01" class="form-control" id="08StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
@@ -1535,13 +1635,13 @@ function body(bodytype) {
         <td>Gap</td>
         <td>3.0±1.0</td>
         <td>2.0~4.0</td>
-        <td>LH: <input type="number" tabindex="2" maxlength="4" step="0.01" class="form-control nhap" id="01GapLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="01GapLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step (cử)</td>
         <td>0.3±1.2</td>
         <td>-0.9~+1.5</td>
-        <td>LH: <input type="number" tabindex="3" step="0.01" class="form-control" id="01StepLH nhap" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="01StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -1598,13 +1698,13 @@ function body(bodytype) {
         <td>Gap</td>
         <td>3.0±1.0</td>
         <td>2.0~4.0</td>
-        <td>RH: <input type="number" tabindex="1" maxlength="4" step="0.01" class="form-control nhap" id="01GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="01GapRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step (cử)</td>
         <td>0.3±1.2</td>
         <td>-0.9~+1.5</td>
-        <td>RH: <input type="number" tabindex="4" step="0.01" class="form-control" id="01StepRH nhap" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="01StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -1708,7 +1808,7 @@ function body(bodytype) {
 
 
 
-        <tr>
+    <tr>
         <td rowspan="4">Gò má và cửa trước</td>
         <td rowspan="2">07<br>(10.35WL)</td>
         <td>Gap</td>
@@ -1718,24 +1818,24 @@ function body(bodytype) {
         </tr>
         <tr>
         <td>Step</td>
-        <td>-0.4±1.0 </td>
-        <td>-1.4~+0.6</td>
+        <td>-0.1 +1.0/-0.7</td>
+        <td>-0.8~+0.9</td>
         <td>RH: <input type="number" step="0.01" class="form-control" id="07StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
-
+        
 
         <tr>
-        <td rowspan="2">08</td>
+        <td rowspan="2">08<br>(4.95WL)</td>
         <td>Gap</td>
-        <td>4.0+1.0/-0.8</td>
-        <td>3.2 ~ 5.0</td>
+        <td>3.7+1.0/-0.7</td>
+        <td>3.0~4.7</td>
         <td>RH: <input type="number" step="0.01" class="form-control" id="08GapRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step</td>
-        <td>0.2±1.0</td>
-        <td>-0.8~+1.2</td>       
+        <td>-1.6 +0.7/-1.0</td>
+        <td>-2.6~-0.9</td>  
         <td>RH: <input type="number" step="0.01" class="form-control" id="08StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         `;
@@ -1879,7 +1979,7 @@ function body(bodytype) {
         <tr>
         <td>Step</td>
         <td>-1.3±1.5</td>
-        <td>-2.0~-0.2</td>
+        <td>-2.8~0.2</td>
         <td>LH: <input type="number" step="0.01" class="form-control" id="14StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
@@ -2082,13 +2182,13 @@ function body(bodytype) {
         <td>Gap</td>
         <td>3.0±1.0</td>
         <td>2.0~4.0</td>
-        <td>LH: <input type="number" tabindex="2" maxlength="4" step="0.01" class="form-control nhap" id="01GapLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number step="0.01" class="form-control" id="01GapLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step (cử)</td>
         <td>0.3±1.2 </td>
         <td>-0.9~+1.5</td>
-        <td>LH: <input type="number" tabindex="3" step="0.01" class="form-control" id="01StepLH nhap" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="01StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -2145,13 +2245,13 @@ function body(bodytype) {
         <td>Gap</td>
         <td>3.0±1.0</td>
         <td>2.0~4.0</td>
-        <td>RH: <input type="number" tabindex="1" maxlength="4" step="0.01" class="form-control nhap" id="01GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="01GapRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step (cử)</td>
         <td>0.3±1.2</td>
         <td>-0.9~+1.5</td>
-        <td>RH: <input type="number" tabindex="4" step="0.01" class="form-control" id="01StepRH nhap" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="01StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 

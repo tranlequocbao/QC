@@ -1,7 +1,7 @@
 <?php
 
 if(!isset($_SESSION)) session_start();
-if(!isset($_SESSION['logined'])){
+if(!isset($_SESSION['IDuser'])){
     echo json_encode([
         'code' => 401,
         'message' => 'Please login!'
@@ -70,9 +70,9 @@ function updateToTableCarExportByTool($db, $vincode, $begin = false){
     return true;
 }
 
-require_once "connectdata.php";
+include "connectdata.php";
 require_once '../vendor/PHPExcel/Classes/PHPExcel.php';
-require_once 'configFile.php';
+//require_once 'configFile.php';
 //require_once './log.php';
 //$db = new pdoRequest();
 //$log = new Logger();
@@ -96,12 +96,13 @@ $path = [];
 
 
 $folder = "";
-$query_folder = 'select car_folder from car_code where carcode="'.$vin_code_mini.'"';
+$query_folder = 'select car_folder from car_code where car_code="'.$vin_code_mini.'"';
 $result=$conn->query($query_folder);
 if($result->num_rows>0){
-    $row=$result0->fetch_assoc();
+    $row=$result->fetch_assoc();
     $folder=$row['car_folder'];
 }
+echo json_encode(["data"=>$folder]);
 //default url signature
 $signaturePath = realpath('../assets/images/Stamp');
 $heightSignature = 68;
@@ -111,17 +112,17 @@ $heightSignature = 68;
 $subSheet = 0;
 $endSheet = 1;
 
-$config          = [$configExcelSheet1, $configExcelSheet2];
+//$config          = [$configExcelSheet1, $configExcelSheet2];
  date_default_timezone_set("Asia/Ho_Chi_Minh");
         $dayCreate = date('dmY');
 //  $db->setTable('checking');
 //         $dayCreate = $db->one(['error_code', $vin_code])['updated_at'] ??'';
 
-        $query_daycreate = 'select updated_at from checking_02_han where error_code="'.$vin_code.'"';
+        $query_daycreate = 'select time_update from checking_02_han where vincode="'.$vin_code.'"';
         $result=$conn->query($query_daycreate);
         if($result->num_rows>0){
             $row=$result->fetch_assoc();
-            $dayCreate=$row['updated_at'];
+            $dayCreate=$row['time_update'];
         }
         $dayCreate = substr($dayCreate,0,10);
 $ds = DIRECTORY_SEPARATOR;
@@ -144,18 +145,18 @@ if (!file_exists($path_export_temp. $ds . 'doned')) {
 }
 
 //remove all image SEALER
-if ($handle = opendir($path_export_temp. $ds . 'images' . $ds . 'SEALER')) {
-    while (false !== ($entry = readdir($handle))) {
-        if ($entry != "." && $entry != "..") {
-            try{
-                unlink($path_export_temp. $ds . 'images' . $ds . 'SEALER' . $ds . $entry);
-            }catch (Exception $e){
-                $log->write($e);
-            }
-        }
-    }
-    closedir($handle);
-}
+// if ($handle = opendir($path_export_temp. $ds . 'images' . $ds . 'SEALER')) {
+//     while (false !== ($entry = readdir($handle))) {
+//         if ($entry != "." && $entry != "..") {
+//             try{
+//                 unlink($path_export_temp. $ds . 'images' . $ds . 'SEALER' . $ds . $entry);
+//             }catch (Exception $e){
+//                 $log->write($e);
+//             }
+//         }
+//     }
+//     closedir($handle);
+// }
 
 //remove all image QC1K
 if ($handle = opendir($path_export_temp. $ds . 'images' . $ds . 'QC1K')) {

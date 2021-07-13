@@ -64,15 +64,15 @@ if ($type == 'loadall') {
     $img_arry = $img_arryLH=$img_arryRH=[];
     if (isset($_SESSION['Shop']))
         $shop = $_SESSION['Shop'];
-        if($station!='ALL'){
+        if($station!='All'){
           
-            $img_arry = recursiveSearch("./assets/img/" . $folder . "/" . $shop . '/station02/' . $station, "/^.*\.(jpg|jpeg|png)$/");
+            //$img_arry = recursiveSearch("../page/assets/img/" . $folder . "/" . $shop . '/station02/' . $station, "/^.*\.(jpg|jpeg|png)$/");
         }
         
             
         else{
-            $img_arryLH=recursiveSearch("./assets/img/" . $folder . "/" . $shop . '/station02/LH' , "/^.*\.(jpg|jpeg|png)$/");
-            $img_arryRH=recursiveSearch("./assets/img/" . $folder . "/" . $shop . '/station02/RH' , "/^.*\.(jpg|jpeg|png)$/");
+            $img_arryLH=recursiveSearch("../page/assets/img/" . $folder . '/Body/station02/LH' , "/^.*\.(jpg|jpeg|png)$/");
+            $img_arryRH=recursiveSearch("../page/assets/img/" . $folder . '/Body/station02/RH' , "/^.*\.(jpg|jpeg|png)$/");
         }
 
 

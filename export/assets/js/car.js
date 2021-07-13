@@ -265,7 +265,7 @@ function car() {
         //show overlay waiting load sealer
         $("body").append('<div class="__loading"><div class="lds-dual-ring"></div></div>');
         //load sealer
-        // await self.loadAll($("#car_code").val().trim(), null, true);
+        await self.loadAll($("#car_code").val().trim(), null, true);
         var pendingLoadImageAll = setInterval(() => {
             if ($(".area-submit").find('.__box_img').length > 0) {
                 clearInterval(pendingLoadImageAll);
@@ -284,8 +284,8 @@ function car() {
     }
     this.saveImgIfDoneAll = (img) => {
         var exportByTool = false;
-
-        console.log(img);
+        
+       
         if (typeof allowExport != 'undefined') {
             if (allowExport) {
                 exportByTool = true;
@@ -297,9 +297,10 @@ function car() {
             data: {
                 'images': img,
                 'vin_code': $("#car_code").val(),
-                'vin_code_mini': $("#car_code").val().substring(0, length_car_vin),
+                'vin_code_mini': $("#car_code").val().substring(0,9),
                 'tool': exportByTool ? '1' : '0'
             },
+            cache:false,
             dataType: 'json',
             success: function (result) {
                 console.log(result);
@@ -331,6 +332,7 @@ function car() {
                 if (exportPage && !exportAuto) {
                     cls = '__box_img exporting col-12';
                 }
+                console.log(cls);
                 $(this).removeAttr('class').attr('class', cls);
             });
 
@@ -339,6 +341,7 @@ function car() {
                     var nameImg = $(this).find('img').attr('alt');
                     html2canvas($(this).get(0)).then(function (canvas) {
                         img[nameImg] = canvas.toDataURL("image/png");
+                        console.log(nameImg);
                     });
                 });
             }, 100);
@@ -363,6 +366,7 @@ function car() {
             },
 
             success: function (result) {
+                console.log(result);
                 $userType = $("meta[name=_ps]").attr('content');
                 if (result.code == 200) {
                     console.log(result);
