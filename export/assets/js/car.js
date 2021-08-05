@@ -285,7 +285,7 @@ function car() {
     this.saveImgIfDoneAll = (img) => {
         var exportByTool = false;
         
-       
+        console.log(img); return;
         if (typeof allowExport != 'undefined') {
             if (allowExport) {
                 exportByTool = true;
@@ -300,16 +300,15 @@ function car() {
                 'vin_code_mini': $("#car_code").val().substring(0,9),
                 'tool': exportByTool ? '1' : '0'
             },
-            cache:false,
             dataType: 'json',
             success: function (result) {
                 console.log(result);
-                if (exportByTool) {
-                    window.location.href = './?all=1';
-                    return true;
-                }
-                window.location.href = window.location.origin + window.location.pathname;
-                return true;
+                // if (exportByTool) {
+                //     window.location.href = './?all=1';
+                //     return true;
+                // }
+                // window.location.href = window.location.origin + window.location.pathname;
+                // return true;
             },
             error: function (error) {
                 console.log(error.responseText)
@@ -341,7 +340,6 @@ function car() {
                     var nameImg = $(this).find('img').attr('alt');
                     html2canvas($(this).get(0)).then(function (canvas) {
                         img[nameImg] = canvas.toDataURL("image/png");
-                        console.log(nameImg);
                     });
                 });
             }, 100);

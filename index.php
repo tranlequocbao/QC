@@ -9,7 +9,7 @@
 if (isset($_SESSION['Shop'])&&isset($_SESSION['Station']))
 {
 
-    if($_SESSION['Shop']=='All'||$_SESSION['Station']=='All'){
+    if($_SESSION['Shop']=='All'){
     
         header("Location: ./Dashboard/examples/user.php");
     }

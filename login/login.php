@@ -27,9 +27,8 @@ if(isset($_POST['submit'])){
     }
 }
 else{
-    // echo "User chưa được đăng ký hoặc sai mã số";
+    echo "User chưa được đăng ký hoặc sai mã số";
 
-    echo "<script>alert('User đăng nhập không đúng')</script>";
 
 }
 mysqli_close($conn);
